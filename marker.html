@@ -1,0 +1,100 @@
+<!doctype html>
+<!--
+ @license
+ Copyright 2019 Google LLC. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+-->
+<html>
+  <head>
+    <title>Simple Markers</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <!-- jsFiddle will insert css and js -->
+    <script>
+        function initMap() {
+
+            let myStyles = [
+                {
+                    featureType: "all",
+                    elementType: "labels",
+                    stylers: [
+                        { visibility: "on" }
+                    ]
+                }
+            ];
+
+            const center = { lat: 18.463536, lng: 73.868177};
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 18,
+                center: center,
+                mapTypeId: 'satellite',
+                styles: myStyles
+            });
+
+            // new google.maps.Marker({
+            //     position: myLatLng,
+            //     map,
+            //     title: "Hello World!",
+            // });
+
+            let markers = [
+                { lat: 18.463105, lng: 73.867902 },
+                { lat: 18.463604, lng: 73.868010 },
+                { lat: 18.463395, lng: 73.868415 },
+                { lat: 18.463531, lng: 73.867015 },
+                { lat: 18.463092, lng: 73.868315 },
+                { lat: 18.463283, lng: 73.867615 }
+            ];
+
+            let icon = {
+                url: "marker.png",
+                size: new google.maps.Size(100, 100),
+                origin: new google.maps.Point(0, 0),
+                scaledSize: new google.maps.Size(50, 50),
+            };
+
+            markers.forEach(mark => {
+                new google.maps.Marker({
+                    position: mark,
+                    map,
+                    title: "Mark"
+                });
+            });
+        }
+
+        window.initMap = initMap;
+    </script>
+    <style>
+        #map {
+            height: 100%;
+        }
+
+        /*
+        * Optional: Makes the sample page fill the window.
+        */
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+
+    <!--
+      The `defer` attribute causes the callback to execute after the full HTML
+      document has been parsed. For non-blocking uses, avoiding race conditions,
+      and consistent behavior across browsers, consider loading using Promises.
+      See https://developers.google.com/maps/documentation/javascript/load-maps-js-api
+      for more information.
+      -->
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&v=weekly"
+      defer
+    ></script>
+
+
+  </body>
+</html>
